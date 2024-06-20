@@ -1,0 +1,52 @@
+{
+  "name": "nationstates-nscode",
+  "displayName": "NationStates NSCode",
+  "description": "Syntax highlighting for NationStates NSCode",
+  "version": "0.0.1",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/esfalsa/vscode-nscode.git"
+  },
+  "publisher": "esfalsa",
+  "author": {
+    "name": "esfalsa",
+    "email": "pronoun.nationstates@gmail.com"
+  },
+  "engines": {
+    "vscode": "^1.90.0"
+  },
+  "categories": [
+    "Programming Languages"
+  ],
+  "contributes": {
+    "languages": [
+      {
+        "id": "nscode",
+        "aliases": [
+          "NSCode",
+          "nscode"
+        ],
+        "extensions": [
+          ".nscode"
+        ],
+        "configuration": "./language-configuration.json"
+      }
+    ],
+    "grammars": [
+      {
+        "language": "nscode",
+        "scopeName": "text.nscode",
+        "path": "./syntaxes/nscode.tmLanguage.json"
+      }
+    ]
+  },
+  "scripts": {
+    "fmt": "prettier --write .",
+    "package": "vsce package"
+  },
+  "devDependencies": {
+    "@vscode/vsce": "^2.29.0",
+    "prettier": "^3.3.2"
+  },
+  "packageManager": "pnpm@9.4.0+sha512.f549b8a52c9d2b8536762f99c0722205efc5af913e77835dbccc3b0b0b2ca9e7dc8022b78062c17291c48e88749c70ce88eb5a74f1fa8c4bf5e18bb46c8bd83a"
+}

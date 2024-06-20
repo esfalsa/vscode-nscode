@@ -1,0 +1,117 @@
+{
+  "$schema": "https://json.schemastore.org/tmlanguage.json",
+  "name": "NSCode",
+  "patterns": [
+    {
+      "include": "#tags"
+    }
+  ],
+  "repository": {
+    "tags": {
+      "patterns": [{ "include": "#tag-open" }, { "include": "#tag-close" }]
+    },
+    "attribute": {
+      "patterns": [
+        {
+          "include": "#attribute-interior"
+        },
+        {
+          "begin": "(view)(?![\\w:-])",
+          "beginCaptures": {
+            "0": { "name": "entity.other.attribute-name.nscode" }
+          },
+          "end": "(?=\\s*+[^=\\s])",
+          "name": "meta.attribute.$1.nscode",
+          "patterns": [{ "include": "#attribute-interior" }]
+        }
+      ]
+    },
+    "attribute-interior": {
+      "patterns": [
+        {
+          "begin": "=",
+          "beginCaptures": {
+            "0": {
+              "name": "punctuation.separator.key-value.nscode"
+            }
+          },
+          "end": "(?<=[^\\s=])(?!\\s*=)|(?=/?])",
+          "patterns": [
+            {
+              "match": "([^\"'\\[\\]`\\/]|\\/(?!\\]))+",
+              "name": "string.unquoted.nscode"
+            },
+            {
+              "begin": "\"",
+              "beginCaptures": {
+                "0": {
+                  "name": "punctuation.definition.string.begin.nscode"
+                }
+              },
+              "end": "\"",
+              "endCaptures": {
+                "0": {
+                  "name": "punctuation.definition.string.end.nscode"
+                }
+              },
+              "name": "string.quoted.double.nscode"
+            },
+            {
+              "begin": "'",
+              "beginCaptures": {
+                "0": {
+                  "name": "punctuation.definition.string.begin.nscode"
+                }
+              },
+              "end": "'",
+              "endCaptures": {
+                "0": {
+                  "name": "punctuation.definition.string.end.nscode"
+                }
+              },
+              "name": "string.quoted.single.nscode"
+            }
+          ]
+        }
+      ]
+    },
+    "tag-open": {
+      "begin": "(?i)(\\[)(b|i|u|strike|sub|sup|nation|region|proposal|resolution|spoiler|url|list|\\*|pre|size|colou?r|quote|background(-block)?|font|align|img|float|box|sidebar|tab|anchor|table|tr|td)(?=\\s|=|\\/?\\])",
+      "beginCaptures": {
+        "1": { "name": "punctuation.definition.tag.begin.nscode" },
+        "2": { "name": "entity.name.tag.nscode" }
+      },
+      "end": "\\]",
+      "endCaptures": {
+        "0": {
+          "name": "punctuation.definition.tag.end.nscode"
+        }
+      },
+      "name": "meta.tag.inline.$2.start.nscode",
+      "patterns": [
+        {
+          "include": "#attribute"
+        }
+      ]
+    },
+    "tag-close": {
+      "begin": "(?i)(\\[\\/)(b|i|u|strike|sub|sup|nation|region|proposal|resolution|spoiler|url|list|\\*|pre|size|colou?r|quote|background(-block)?|font|align|img|float|box|sidebar|tab|anchor|table|tr|td)(?=\\])",
+      "beginCaptures": {
+        "1": {
+          "name": "punctuation.definition.tag.begin.nscode"
+        },
+        "2": {
+          "name": "entity.name.tag.nscode"
+        }
+      },
+      "end": "\\]",
+      "endCaptures": {
+        "0": {
+          "name": "punctuation.definition.tag.end.nscode"
+        }
+      },
+      "name": "meta.tag.inline.$2.end.nscode"
+    }
+  },
+  "scopeName": "text.nscode"
+}

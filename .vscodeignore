@@ -1,0 +1,5 @@
+.vscode/**
+.vscode-test/**
+playground/**
+.gitignore
+pnpm-lock.yaml
